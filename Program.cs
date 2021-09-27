@@ -19,7 +19,8 @@ namespace ExtractTablesToClasses
                 {"password", string.Empty },
                 {"dbname", "master"},
                 {"tablename", string.Empty },
-                {"namespace", string.Empty }
+                {"namespace", string.Empty },
+                {"filename", "class.cs" }
             };
 
             SetConfiuration(args, ref configuration);
@@ -52,7 +53,7 @@ namespace ExtractTablesToClasses
             List<string> list = database.readAllTheFIelds(configuration["tablename"]);
             database.disconnect();       
 
-            File.WriteAllText("Class.txt", GenerateCode(configuration["tablename"], configuration["namespace"], list));
+            File.WriteAllText(configuration["filename"], GenerateCode(configuration["tablename"], configuration["namespace"], list));
         }
 
         private static string GenerateCode(string tablename, string nameSpace, List<string> list)
@@ -93,7 +94,7 @@ namespace ExtractTablesToClasses
 
         private static void SetConfiuration(string[] args, ref Dictionary<string, string> configuration)
         {
-            for(int i = 0; i < args.Length; i = i+ 2)
+            for(int i = 0; i < args.Length; i = i + 2)
             {
                 if (configuration.Keys.Contains(args[i]))
                 {
@@ -124,7 +125,7 @@ namespace ExtractTablesToClasses
 
         private static void DisplayConfiguration(Dictionary<string, string> configuration)
         {
-            foreach(KeyValuePair<string,string> pair in configuration)
+            foreach(var pair in configuration)
             {
                 Console.WriteLine($"{pair.Key} : {pair.Value}");
             }
