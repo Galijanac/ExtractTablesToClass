@@ -81,8 +81,7 @@ namespace ExtractTablesToClasses
                 code += "\n     set";
                 code += "\n     {";
                 code += $"\n        {columnName.ToLower()} = value;";
-                code += $"\n         if (PropertyChanged != null)";
-                code += $"\n        PropertyChanged(this, new PropertyChangedEventArgs(\"{columnName.ToLower()}\"));";
+                code += $"\n        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(\"{columnName.ToLower()}\"));";
                 code += "\n     }";
                 code += "\n}";
 
