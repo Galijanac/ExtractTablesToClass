@@ -8,12 +8,17 @@ namespace ExtractTablesToClasses
 {
     public interface IDatabase
     {
-        string connectionString { get; set; }
+        string ConnectionString { get; set; }
 
-        List<string> readAllTheFIelds(string tableName);
+        bool Connect(string ip, string username, string pass, string dbName = "");
 
-        bool connect(string ip, string username, string pass, string dbName = "");
+        bool Disconnect();
 
-        bool disconnect();
+        List<string> ReadAllTheFields();
+
+        List<Dictionary<string, string>> ReadEverything();
+        void CreateClasses(List<string> list);
+
+        void SetScript();
     }
 }
